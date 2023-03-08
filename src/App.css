@@ -1,38 +1,64 @@
-.App {
+.App{
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #eff0f1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*{
+  font-family: "Roboto", sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1{
+  font-size: 65px;
+  color: #0023e6;
+}
+
+button{
+  cursor: pointer;
+}
+
+.card-container {
+  max-width: 725px;
+  margin: auto;
+  background: #f6f6f6;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+   box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+   border-radius: 5px ;
+   padding: 40px 50px 30px;
+   max-height: 420px;
+  overflow: hidden;
+  overflow-y: scroll;
+
+}
+
+.view-button {
+  border-radius: 5px;
+  background: #fff;
+  color: #007AE6;
+  border: none;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+   box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+   padding: 15px 30px;
+   font-size:16px;
+   margin-top:20px;
+}
+
+.view-button:active {
+  background-color: #FCBA02;
+  color: #fff;
+}
+.view-button:focus {
+  background-color: #FCBA02;
+  color: #fff;
+}
+.selection {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 40px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
