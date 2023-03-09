@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +8,19 @@ function AddTicket() {
   const [description, setDescription] = useState("");
   const [developer, setDeveloper] = useState("");
   const [priority, setPriority] = useState("");
+  const [developersList, setDevelopersList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:5000/accounts");
+        setDevelopersList(response.data.map((developer) => developer.Name));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -45,6 +58,7 @@ function AddTicket() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            autoComplete="off"
           />
         </label>
         <label>
@@ -59,9 +73,11 @@ function AddTicket() {
             <option value="" disabled>
               Choose a developer
             </option>
-            <option value="Paul">Paul</option>
-            <option value="Lance">Lance</option>
-            <option value="Kim">Kim</option>
+            {developersList.map((developer, index) => (
+              <option key={index} value={developer}>
+                {developer}
+              </option>
+            ))}
           </select>
         </label>
         <label>

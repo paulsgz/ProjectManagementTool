@@ -1,0 +1,38 @@
+.FormGroup {
+    width: 100%;
+  }
+  
+  .FormControl {
+    width: 100%;
+  }
+  
+  .container {
+    background-color: #f2f2f2;
+  }
+  
+  .form-box {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h2 {
+    margin-bottom: 30px;
+  }
+  .Image {
+    background-color: red;
+    height: 100vh;
+  }
+  
+  @media (min-width: 768px) {
+    .h-100 {
+      min-height: 100vh;
+    }
+  }
