@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./SignIn.css";
 
@@ -11,43 +12,37 @@ function SignIn() {
   const [role, setRole] = useState("");
   const [formHeader, setFormHeader] = useState("Sign In");
 
+  const navigate = useNavigate();
+
   const toggleSignUp = () => {
     setIsSignUp(!isSignUp);
     setFormHeader(isSignUp ? "Sign In" : "Sign Up");
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (isSignUp) {
-      try {
-        const response = await axios.post(
-          'http://localhost:5000/createAccounts',
-          {
-            email,
-            password,
-            name,
-            role,
-          }
-        );
-        console.log(response.data);
+    try {
+      const response = await axios.post(
+        isSignUp ? 'http://localhost:5000/createAccounts' : 'http://localhost:5000/login',
+        {
+          email,
+          password,
+          name,
+          role,
+        }
+      );
+
+      // Pass the user data to the App component
+    // Store the user data in session storage
+    sessionStorage.setItem('user', JSON.stringify(response.data));
+
+    // Redirect to the App component
+    navigate("/app");
   
-        // Clear form fields
-        setEmail("");
-        setPassword("");
-        setName("");
-        setRole("");
-  
-        // Switch to sign-in form
-        setIsSignUp(false);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      // Handle sign-in form submission
+    } catch (error) {
+      console.log(error);
     }
   };
-
   return (
     <Container fluid className="h-100">
       <Row className="h-100 align-items-center">

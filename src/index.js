@@ -14,8 +14,8 @@ root.render(
     <>
     <Router>
     <Routes>
-    <Route index element={<SignIn />} />
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<SignIn />} />
+    <Route path="/app" element={<App />} />
     </Routes>
     </Router>
   </>
