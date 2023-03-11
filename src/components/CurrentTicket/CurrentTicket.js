@@ -54,6 +54,9 @@ function CurrentTicket() {
           <p>
             Priority:  <span>{ticket.Priority}</span>
           </p>
+          <p>
+            Status:  <span>{ticket.Status}</span>
+          </p>
           <p>Description: </p>
           <p>{ticket.Description}</p>
         </div>

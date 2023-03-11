@@ -8,6 +8,7 @@ function AddTicket() {
   const [description, setDescription] = useState("");
   const [developer, setDeveloper] = useState("");
   const [priority, setPriority] = useState("");
+  const [status, setStatus] = useState("");
   const [developersList, setDevelopersList] = useState([]);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function AddTicket() {
     formData.append("description", description);
     formData.append("developer", developer);
     formData.append("priority", priority);
+    formData.append("status", status);
 
     const entries = formData.entries();
     const json = Object.fromEntries(Array.from(entries));
@@ -39,6 +41,7 @@ function AddTicket() {
       setDescription("");
       setDeveloper("");
       setPriority("");
+      setStatus("");
     } catch (err) {
       toast.error("Error creating ticket");
     }
@@ -96,6 +99,24 @@ function AddTicket() {
             <option value="Medium">Medium</option>
             <option value="High">High</option>
             <option value="Critical">Critical</option>
+          </select>
+        </label>
+        <label>
+          Status
+          <select
+            name="status"
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Choose a status
+            </option>
+            <option value="To do">To do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="In Review">In Review</option>
+            <option value="Finished">Finished</option>
           </select>
         </label>
         <button type="submit" className="create">Create</button>

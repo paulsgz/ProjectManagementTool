@@ -28,7 +28,6 @@ button{
    border-radius: 5px ;
    padding: 40px 50px 30px;
    max-height: 420px;
-   overflow: hidden;
 
 }
 
@@ -60,3 +59,4 @@ button{
   margin: auto;
   margin-top: 40px;
 }
+
