@@ -1,65 +1,27 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import "./AddTicket.css";
-import CurrentTicket from "../CurrentTicket/CurrentTicket";
-import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
-
-function AddTicket() {
-  const [description, setDescription] = useState("");
-  const [developer, setDeveloper] = useState("");
-  const [priority, setPriority] = useState("");
-  const [status, setStatus] = useState("");
-  const [developersList, setDevelopersList] = useState([]);
-  const formData = new FormData();
-  
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get("http://localhost:5000/accounts");
-        setDevelopersList(response.data.map((developer) => developer.Name));
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, [formData]);
-
-
-  const navigate = useNavigate();
-
-  const sendData = async (e) => {
-    e.preventDefault();
-    
-  
-    formData.append("description", description);
-    formData.append("developer", developer);
-    formData.append("priority", priority);
-    formData.append("status", status);
-  
-    const entries = formData.entries();
-    const json = Object.fromEntries(Array.from(entries));
-    console.log(json);
-  
-    try {
-      await axios.post("http://localhost:5000/create", json);
-      toast.success("Ticket created successfully");
-      setDescription("");
-      setDeveloper("");
-      setPriority("");
-      setStatus("");
-      window.location.reload();
-    } catch (err) {
-      toast.error("Error creating ticket");
-    }
-  };
-  
-
+const EditTicketModal = ({
+  showModal,
+  closeModal,
+  saveEdit,
+  description,
+  setDescription,
+  developer,
+  setDeveloper,
+  priority,
+  setPriority,
+  status,
+  setStatus,
+  developersList,
+}) => {
   return (
-    <div className="add-ticket">
-      <form className="addForm" onSubmit={sendData}>
+    <Modal
+      isOpen={showModal}
+      onRequestClose={closeModal}
+      contentLabel="Edit Ticket"
+    >
+      <h4>Edit Ticket</h4>
+      <form className="addForm" onSubmit={saveEdit}>
         <label>
           Description
           <input
@@ -128,11 +90,12 @@ function AddTicket() {
             <option value="Finished">Finished</option>
           </select>
         </label>
-        <button type="submit" className="create">Create</button>
+        <button type="submit" className="create">
+          Create
+        </button>
       </form>
-      <ToastContainer />
-    </div>
+    </Modal>
   );
-}
+};
 
-export default AddTicket;
+export default EditTicketModal;

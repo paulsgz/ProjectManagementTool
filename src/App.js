@@ -27,10 +27,10 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-3">
+        <div className="col-sm-2">
           <Sidebar />
         </div>
-        <div className="col-sm-9">
+        <div className="col-sm-10">
           <div className="card-container">
             {addTicket && Role === "team leader" ? <AddTicket /> : <CurrentTicket />}
           </div>

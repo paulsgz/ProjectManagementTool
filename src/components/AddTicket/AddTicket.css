@@ -1,40 +1,55 @@
 form {
     text-align: left;
-}
-
-form label,
-label input,
-label select {
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .add-ticket{
+    width: 60%;
+    height: 100%;
+  }
+  form label,
+  label input,
+  label select {
     display: block;
     text-align: left;
-}
-label input,
-label select {
+  }
+  
+  label input,
+  label select {
     width: 100%;
-    padding:15px;
-    margin-top:10px;
-}
-
-#description {
+    padding: 15px;
+    margin-top: 10px;
+  }
+  
+  #description {
     width: 96%;
-}
-form label {
+  }
+  
+  form label {
     margin-top: 20px;
-}
-
-form button {
+  }
+  
+  form button {
     border-radius: 5px;
-    background: #007AE6;
+    background: #007ae6;
     color: #fff;
     border: none;
-    -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-     box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-     padding: 15px 30px;
-     font-size:16px;
-     margin-top:20px;
-}
-.create:active {
+    -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    padding: 15px 30px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .create {
+    width: 120px;
+  }
+  .create:active {
     background-color: #fff;
-    color: #007AE6;
-}
+    color: #007ae6;
+  }
+  
