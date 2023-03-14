@@ -3,17 +3,14 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./AddTicket.css";
-import CurrentTicket from "../CurrentTicket/CurrentTicket";
-import { useNavigate } from 'react-router-dom';
 
-
-function AddTicket() {
+function AddTicket({ onTicketCreated }) {
   const [description, setDescription] = useState("");
   const [developer, setDeveloper] = useState("");
   const [priority, setPriority] = useState("");
   const [status, setStatus] = useState("");
   const [developersList, setDevelopersList] = useState([]);
-  const formData = new FormData();
+  
   
   useEffect(() => {
     async function fetchData() {
@@ -25,14 +22,14 @@ function AddTicket() {
       }
     }
     fetchData();
-  }, [formData]);
+  }, []);
 
 
-  const navigate = useNavigate();
+
 
   const sendData = async (e) => {
     e.preventDefault();
-    
+    const formData = new FormData();
   
     formData.append("description", description);
     formData.append("developer", developer);
@@ -43,17 +40,21 @@ function AddTicket() {
     const json = Object.fromEntries(Array.from(entries));
     console.log(json);
   
-    try {
-      await axios.post("http://localhost:5000/create", json);
-      toast.success("Ticket created successfully");
-      setDescription("");
-      setDeveloper("");
-      setPriority("");
-      setStatus("");
-      window.location.reload();
-    } catch (err) {
-      toast.error("Error creating ticket");
-    }
+   
+      const shouldSend = window.confirm("Are you sure you want to create this ticket?");
+      if (shouldSend) {
+        try {
+          await axios.post("http://localhost:5000/create", json);
+          toast.success("Ticket created successfully");
+          setDescription("");
+          setDeveloper("");
+          setPriority("");
+          setStatus("");
+          onTicketCreated(); // Call the onTicketCreated prop
+        } catch (err) {
+          toast.error("Error creating ticket");
+        }
+      }
   };
   
 

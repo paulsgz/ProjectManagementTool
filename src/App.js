@@ -8,10 +8,17 @@ function App() {
   const [addTicket, setAddTicket] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
 
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const { Name, Email, Role } = user.user;
+  const user = JSON.parse(sessionStorage.getItem("user")) || {};
+  const { Name, Email, Role } = user.user || {};
+  
 
   console.log(user);
+
+  const handleTicketCreated = () => {
+    setAddTicket(true);
+    window.location.reload();
+  };
+
   const showAddTicket = () => {
     if (Role !== "team leader") {
       alert("You do not have permission to add a ticket.");
@@ -32,7 +39,11 @@ function App() {
         </div>
         <div className="col-sm-10">
           <div className="card-container">
-            {addTicket && Role === "team leader" ? <AddTicket /> : <CurrentTicket />}
+            {addTicket && Role === "team leader" ? (
+             <AddTicket onTicketCreated={handleTicketCreated} />
+            ) : (
+              <CurrentTicket />
+            )}
           </div>
           <div>
             <div className="selection">

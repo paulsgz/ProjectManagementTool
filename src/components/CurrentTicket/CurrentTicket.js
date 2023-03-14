@@ -41,7 +41,7 @@ function CurrentTicket() {
     
   useEffect(() => {
     fetch();
-  }, [dataChanged]);
+  }, [data]);
 
   const deletePost = async (id) => {
     const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
@@ -219,7 +219,19 @@ function CurrentTicket() {
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
-              
+              <button
+            className="edit-ticket"
+            onClick={() => {
+              openModal();
+              setTicketID(ticket._id); // change to ticket._id
+              setDescription(ticket.Description); // set the ticket values to the state values 
+              setDeveloper(ticket.Developer);
+              setPriority(ticket.Priority);
+              setStatus(ticket.Status);
+            }}
+          >
+            <i className="fa-sharp fa-solid fa-edit"></i>
+          </button>
             </div>
           ))}
         </div>
@@ -239,6 +251,19 @@ function CurrentTicket() {
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
+              <button
+            className="edit-ticket"
+            onClick={() => {
+              openModal();
+              setTicketID(ticket._id); // change to ticket._id
+              setDescription(ticket.Description); // set the ticket values to the state values 
+              setDeveloper(ticket.Developer);
+              setPriority(ticket.Priority);
+              setStatus(ticket.Status);
+            }}
+          >
+            <i className="fa-sharp fa-solid fa-edit"></i>
+          </button>
             </div>
           ))}
         </div>
@@ -258,6 +283,19 @@ function CurrentTicket() {
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
+              <button
+            className="edit-ticket"
+            onClick={() => {
+              openModal();
+              setTicketID(ticket._id); // change to ticket._id
+              setDescription(ticket.Description); // set the ticket values to the state values 
+              setDeveloper(ticket.Developer);
+              setPriority(ticket.Priority);
+              setStatus(ticket.Status);
+            }}
+          >
+            <i className="fa-sharp fa-solid fa-edit"></i>
+          </button>
             </div>
           ))}
         </div>
