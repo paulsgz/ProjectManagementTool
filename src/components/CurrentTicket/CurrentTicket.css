@@ -54,9 +54,13 @@ span {
 }
 .Modal {
   background-color: red;
-  height: 60%;
-  width: 60%;
+  height: 70%;
+  width: 30%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 10%;
+  left:40%;
 }

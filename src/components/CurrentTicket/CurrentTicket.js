@@ -14,20 +14,22 @@ function CurrentTicket() {
   const [showModal, setShowModal] = useState(false);
   const [developersList, setDevelopersList] = useState([]);
   const [ticketID, setTicketID] = useState("");
-  const [dataChanged, setDataChanged] = useState(false);
-
-  const fetch = async () => {
-    try {
-      const response = await axios(url);
-      setData(response.data);
-      setDataChanged(true);
-    } catch (error) {
-      console.log(error);
-    }
-  }
- 
+  const [sortOrder, setSortOrder] = useState("ascending");
+  
   useEffect(() => {
     async function fetchData() {
+      try {
+        const response = await axios(url);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchDevelopers() {
       try {
         const response = await axios.get("http://localhost:5000/accounts");
         setDevelopersList(response.data.map((developer) => developer.Name));
@@ -35,13 +37,8 @@ function CurrentTicket() {
         console.error(error);
       }
     }
-    fetchData();
+    fetchDevelopers();
   }, []);
-
-    
-  useEffect(() => {
-    fetch();
-  }, [data]);
 
   const deletePost = async (id) => {
     const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
@@ -84,14 +81,68 @@ function CurrentTicket() {
 
 
   // Filter the tickets based on their status
-  const todoTickets = data.filter(ticket => ticket.Status === 'To do');
-  const inProgressTickets = data.filter(ticket => ticket.Status === 'In progress');
-  const inReviewTickets = data.filter(ticket => ticket.Status === 'In review');
-  const finishedTickets = data.filter(ticket => ticket.Status === 'Finished');
+// Sort the data array based on the priority key
+
+
+
+  const toggleSortOrder = () => {
+    if (sortOrder === "ascending") {
+      setSortOrder("descending");
+    } else {
+      setSortOrder("ascending");
+    }
+  };
+
+
+  const sortedData = data.sort((a, b) => {
+    if (a.Priority === b.Priority) {
+      return 0;
+    } else if (sortOrder === "ascending") {
+      if (a.Priority === "Critical") {
+        return -1;
+      } else if (b.Priority === "Critical") {
+        return 1;
+      } else if (a.Priority === "High") {
+        return -1;
+      } else if (b.Priority === "High") {
+        return 1;
+      } else if (a.Priority === "Medium") {
+        return -1;
+      } else {
+        return 1;
+      }
+    } else {
+      if (a.Priority === "Low") {
+        return -1;
+      } else if (b.Priority === "Low") {
+        return 1;
+      } else if (a.Priority === "Medium") {
+        return -1;
+      } else if (b.Priority === "Medium") {
+        return 1;
+      } else if (a.Priority === "High") {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+  });
+
+
+// Filter the tickets based on their status
+const todoTickets = sortedData.filter(ticket => ticket.Status === 'To do');
+const inProgressTickets = sortedData.filter(ticket => ticket.Status === 'In progress');
+const inReviewTickets = sortedData.filter(ticket => ticket.Status === 'In review');
+const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished');
+
 
   return (
     <div className="current-ticket">
-
+    <div>
+      <button onClick={toggleSortOrder}>
+        {sortOrder === "ascending" ? "Change Sort" : "Change Sort"}
+      </button>
+    </div>
 
       <div className="ticket-section">
         <h3>To Do</h3>
@@ -122,86 +173,6 @@ function CurrentTicket() {
           </button>
           </div>
         ))}
-    <Modal
-      isOpen={showModal}
-      onRequestClose={closeModal}
-      contentLabel="Edit Ticket"
-      className="Modal"
-    >
-      <h4>Edit Ticket</h4>
-      <form className="addForm" onSubmit={e => { e.preventDefault(); saveEdit(ticketID) }}>
-      <label>
-        Description
-        <input
-          id="description"
-          name="description"
-          type="text"
-          placeholder="Description of Ticket..."
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          autoComplete="off"
-        />
-      </label>
-      <label>
-        Assign To
-        <select
-          id="developers"
-          name="developer"
-          value={developer}
-          onChange={(e) => setDeveloper(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Choose a developer
-          </option>
-          {developersList.map((developer, index) => (
-            <option key={index} value={developer}>
-              {developer}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Priority
-        <select
-          name="priority"
-          id="priority"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Choose a priority
-          </option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Critical">Critical</option>
-        </select>
-      </label>
-      <label>
-        Status
-        <select
-          name="status"
-          id="status"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Choose a status
-          </option>
-          <option value="To do">To do</option>
-          <option value="In progress">In progress</option>
-          <option value="In review">In review</option>
-          <option value="Finished">Finished</option>
-        </select>
-      </label>
-      <button type="submit">Save</button>
-      <button onClick={closeModal}>Cancel</button>
-    </form>
-  </Modal>
   </div>
 
 
@@ -300,7 +271,88 @@ function CurrentTicket() {
           ))}
         </div>
 
-        
+        <Modal
+      isOpen={showModal}
+      onRequestClose={closeModal}
+      contentLabel="Edit Ticket"
+      className="Modal"
+    >
+      <h4>Edit Ticket</h4>
+      <form className="addForm" onSubmit={e => { e.preventDefault(); saveEdit(ticketID) }}>
+      <label>
+        Description
+        <input
+          id="description"
+          name="description"
+          type="text"
+          placeholder="Description of Ticket..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          autoComplete="off"
+        />
+      </label>
+      <label>
+        Assign To
+        <select
+          id="developers"
+          name="developer"
+          value={developer}
+          onChange={(e) => setDeveloper(e.target.value)}
+          required
+        >
+          <option value="" disabled>
+            Choose a developer
+          </option>
+          {developersList.map((developer, index) => (
+            <option key={index} value={developer}>
+              {developer}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Priority
+        <select
+          name="priority"
+          id="priority"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          required
+        >
+          <option value="" disabled>
+            Choose a priority
+          </option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </label>
+      <label>
+        Status
+        <select
+          name="status"
+          id="status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          required
+        >
+          <option value="" disabled>
+            Choose a status
+          </option>
+          <option value="To do">To do</option>
+          <option value="In progress">In progress</option>
+          <option value="In review">In review</option>
+          <option value="Finished">Finished</option>
+        </select>
+      </label>
+      <button type="submit">Save</button>
+      <button onClick={closeModal}>Cancel</button>
+    </form>
+  </Modal>
+
+
       </div>
     );
   }

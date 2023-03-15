@@ -38,13 +38,11 @@ function App() {
           <Sidebar />
         </div>
         <div className="col-sm-10">
-          <div className="card-container">
             {addTicket && Role === "team leader" ? (
              <AddTicket onTicketCreated={handleTicketCreated} />
             ) : (
               <CurrentTicket />
             )}
-          </div>
           <div>
             <div className="selection">
               <button
