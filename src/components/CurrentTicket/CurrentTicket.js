@@ -158,6 +158,9 @@ const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished'
             <p>
               Priority: <span>{ticket.Priority}</span>
             </p>
+            <p>
+              Date Created: <span>{ticket.Date}</span>
+            </p>
             <button
             className="edit-ticket"
             onClick={() => {
@@ -190,6 +193,9 @@ const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished'
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
+              <p>
+              Date Created: <span>{ticket.Date}</span>
+            </p>
               <button
             className="edit-ticket"
             onClick={() => {
@@ -222,6 +228,9 @@ const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished'
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
+              <p>
+              Date Created: <span>{ticket.Date}</span>
+            </p>
               <button
             className="edit-ticket"
             onClick={() => {
@@ -254,6 +263,9 @@ const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished'
               <p>
                 Priority: <span>{ticket.Priority}</span>
               </p>
+              <p>
+              Date Created: <span>{ticket.Date}</span>
+            </p>
               <button
             className="edit-ticket"
             onClick={() => {

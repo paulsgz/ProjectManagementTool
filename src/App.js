@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AddTicket from "./components/AddTicket/AddTicket.js";
 import CurrentTicket from "./components/CurrentTicket/CurrentTicket.js";
 import Sidebar from "./components/sideBar/sideBar.js";
+import Dashboard from "./components/Dashboard/Dashboard.js";
+import 'bootstrap/dist/css/bootstrap.css';
 import "./App.css";
 
 function App() {
@@ -32,54 +34,56 @@ function App() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-2">
-          <Sidebar />
-        </div>
-        <div className="col-sm-10">
-            {addTicket && Role === "team leader" ? (
-             <AddTicket onTicketCreated={handleTicketCreated} />
-            ) : (
-              <CurrentTicket />
-            )}
-          <div>
-            <div className="selection">
-              <button
-                onClick={showCurrentTicket}
-                className={
-                  !addTicket && Role !== "team leader"
-                    ? "view-button active-button"
-                    : addTicket
-                    ? "view-button"
-                    : "view-button active-button"
-                }
-              >
-                Current Tickets
-              </button>
-              <button
-                onClick={showAddTicket}
-                className={
-                  addTicket && Role === "team leader"
-                    ? "view-button active-button"
-                    : "view-button"
-                }
-              >
-                Add Ticket
-              </button>
-            </div>
-          </div>
-          {showAlert && (
-            <div className="alert-container">
-              <div className="alert">
-                <p>You must be a team leader to access the current tickets page.</p>
-                <button onClick={() => setShowAlert(false)}>OK</button>
-              </div>
-            </div>
-          )}
+
+  <div className="container-fluid">
+  <div className="row">
+    <div className="col-xl-2">
+      <Sidebar user = {user.user}/>
+    </div>
+    <div className="col-xl-10">
+    <Dashboard />
+      {/* {addTicket && Role === "team leader" ? (
+        <AddTicket onTicketCreated={handleTicketCreated} />
+      ) : (
+        <CurrentTicket />
+      )} */}
+      {/* <div>
+        <div className="selection">
+          <button
+            onClick={showCurrentTicket}
+            className={
+              !addTicket && Role !== "team leader"
+                ? "view-button active-button"
+                : addTicket
+                ? "view-button"
+                : "view-button active-button"
+            }
+          >
+            Current Tickets
+          </button>
+          <button
+            onClick={showAddTicket}
+            className={
+              addTicket && Role === "team leader"
+                ? "view-button active-button"
+                : "view-button"
+            }
+          >
+            Add Ticket
+          </button>
         </div>
       </div>
+      {showAlert && (
+        <div className="alert-container">
+          <div className="alert">
+            <p>You must be a team leader to access the current tickets page.</p>
+            <button onClick={() => setShowAlert(false)}>OK</button>
+          </div>
+        </div>
+      )} */}
     </div>
+  </div>
+</div>
   );
 }
 

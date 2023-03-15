@@ -1,8 +1,12 @@
 .App{
   text-align: center;
 }
-body {
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: #eff0f1;
+  font-family: 'Open Sans', sans-serif;
 }
 
 *{
@@ -63,11 +67,17 @@ button{
     width: 400px;
     justify-content: space-between;
   }
-  .col-sm-10{
+  .col-xl-10{
     height: 100vh;
-
+    max-width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  .container-fluid {
+    width: 100vw;
+  }
+  .col-xl-2 {
+    height: 100vh;
   }

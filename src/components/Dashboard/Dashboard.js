@@ -1,0 +1,125 @@
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import welcome from '../../images/code.png';
+import axios from "axios";
+import { BsCardChecklist} from "react-icons/bs";
+import { GiProgression } from "react-icons/gi"
+import { SiCodereview } from "react-icons/si"
+import { IoCloudDone } from "react-icons/io5"
+import { FaUserCog } from "react-icons/fa"
+import "./Dashboard.css";
+
+const Dashboard = () => {
+  const [currentTime, setCurrentTime] = useState(moment());
+  const [developersList, setDevelopersList] = useState([]);
+
+  useEffect(() => {
+    async function fetchDevelopers() {
+      try {
+        const response = await axios.get("http://localhost:5000/accounts");
+        setDevelopersList(response.data.map((developer) => developer.Name));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchDevelopers();
+  }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(moment());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="container-fluid2">
+      <div className="color">
+        <h2 className="dashboard-title">Dashboard</h2>
+        <div className="time-date">
+          {currentTime.format('MMMM Do YYYY, h:mm:ss a')}
+        </div>
+      </div>
+
+      <div className="row row1">
+        <div className='col-sm-4'>
+          <div className="card card-welcome">
+            <div className="card-body">
+              <h5 className="card-title">Welcome to PMT Pro</h5>
+              <p className="card-text">PMT Pro is a powerful project management tool designed to help you and your team stay organized and on track.</p>
+              <img src={welcome} width="500" height="500" alt="Welcome" />
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-4'>
+          <div className="card card-welcome">
+            <div className="card-body">
+              <h5 className="card-title">Recent Tickets</h5>
+              <p className="card-text">Keep track of your team's support requests and stay up to date with the latest issues.</p>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-4'>
+          <div className="card card-welcome">
+            <div className="card-body">
+              <h5 className="card-title">Progress Tracker</h5>
+              <p className="card-text">Easily track your project's progress with our intuitive progress tracker.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row row2">
+        <div className='col-sm-3' >
+          <div className="card card-welcome To-Do">
+            <div className="card-body">
+              <h5 className="card-title ">To Do <BsCardChecklist style={{ marginBottom:'4px', marginRight:'4px' }} /></h5>
+              <p className="card-text">Manage your team's tasks and stay on top of your project's to-do list.</p>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-3'>
+          <div className="card card-welcome Progress">
+            <div className="card-body">
+              <h5 className="card-title ">In Progress<GiProgression style={{ marginBottom:'4px', marginLeft:'4px' }}/></h5>
+              <p className="card-text">Focus on current tasks and keep your team on track.</p>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-3'>
+          <div className="card card-welcome Review">
+            <div className="card-body">
+              <h5 className="card-title">In Review <SiCodereview style={{ marginBottom:'4px', marginRight:'4px' }}/></h5>
+              <p className="card-text">Get feedback on completed tasks and make sure everything is up to standard.</p>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-3'>
+          <div className="card card-welcome Finished">
+            <div className="card-body">
+              <h5 className="card-title">Finished <IoCloudDone style={{ marginBottom:'4px', marginRight:'4px' }}/></h5>
+              <p className="card-text">Celebrate your team's accomplishments and mark completed tasks as finished.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row row3">
+  <div className="col-sm-12">
+    <div className="card">
+      <div className="card-body">
+        <h4 className="card-title">Developers</h4>
+        <ul className="developer-list">
+          {developersList.map((developer, index) => (
+            <li key={index} className="developer-item"><FaUserCog style={{ marginBottom:'4px', marginRight:'4px' }}/>{developer}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+  );
+};
+
+export default Dashboard;

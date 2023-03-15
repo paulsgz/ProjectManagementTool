@@ -1,0 +1,144 @@
+
+.container-fluid2 {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .color {
+    height: 20%;
+    background-color: blue;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 5px;
+  }
+  
+  .dashboard-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  
+  .time-date {
+    color: white;
+  }
+  .col-sm-4 .card {
+    height: 400px;
+    margin-top: -50px;
+  }
+  .col-sm-3 .card {
+    height: 150px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .col-sm-12 .card {
+    max-height: 200px;
+    margin-top: 0px;
+  }
+
+  .row1{
+    padding: 20px; 
+  }
+  .row2{
+    padding: 20px;
+  }
+  .row3{
+    padding: 20px;
+  }
+  .time-date {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+  }
+  .card-welcome {
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card-body img{
+    width: 70%;
+    height: 80%;
+    margin-top: 10px;
+}
+
+.card-welcome h5 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card-welcome p {
+  font-size: 16px;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+.To-Do {
+    background-color: #f73123 !important;
+    color: rgb(230, 229, 229);
+  }
+  
+  /* In Progress */
+  .Progress {
+    background-color: #e6ad04 !important;
+    color: white;
+    
+  }
+  
+  /* In Review */
+  .Review {
+    background-color: blue !important;
+    color: rgb(230, 229, 229);
+
+  }
+  
+  /* Finished */
+  .Finished {
+    background-color: #419243 !important;
+    color: rgb(230, 229, 229);
+
+  }
+  /* Add this to your Dashboard.css file */
+
+/* Style the card that contains the developer list */
+
+.developer-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .developer-item {
+    margin-bottom: 5px;
+    padding: 10px;  
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
+  }
+  

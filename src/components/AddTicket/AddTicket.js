@@ -10,7 +10,7 @@ function AddTicket({ onTicketCreated }) {
   const [priority, setPriority] = useState("");
   const [status, setStatus] = useState("");
   const [developersList, setDevelopersList] = useState([]);
-  
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   
   useEffect(() => {
     async function fetchData() {
@@ -35,7 +35,7 @@ function AddTicket({ onTicketCreated }) {
     formData.append("developer", developer);
     formData.append("priority", priority);
     formData.append("status", status);
-  
+    formData.append("date",date);
     const entries = formData.entries();
     const json = Object.fromEntries(Array.from(entries));
     console.log(json);
@@ -50,6 +50,7 @@ function AddTicket({ onTicketCreated }) {
           setDeveloper("");
           setPriority("");
           setStatus("");
+          setDate(new Date().toISOString().slice(0, 10));
           onTicketCreated(); // Call the onTicketCreated prop
         } catch (err) {
           toast.error("Error creating ticket");

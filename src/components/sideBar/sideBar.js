@@ -1,20 +1,31 @@
 import React from "react";
 import "./sideBar.css";
+import { FaTachometerAlt, FaTicketAlt, FaPlus } from "react-icons/fa";
 
-function Sidebar() {
+function Sidebar({ user }) {
+  const { Name } = user || {};
+
   return (
     <div className="sidebar">
       <div className="logo">
-        <h1>Project Management Tool</h1>
+        <h2>PMT Pro</h2>
         <div className="profile">
-          <img src={null} alt="Profile Pic" />
-          <h4>John Doe</h4>
+          <h4>Hi {Name}</h4>
         </div>
       </div>
       <ul>
-        <li>Dashboard</li>
-        <li>Current Tickets</li>
-        <li>Add Ticket</li>
+        <li>
+          <FaTachometerAlt />
+          <span>Dashboard</span>
+        </li>
+        <li>
+          <FaTicketAlt />
+          <span>Current Tickets</span>
+        </li>
+        <li>
+          <FaPlus />
+          <span>Add Ticket</span>
+        </li>
       </ul>
     </div>
   );
