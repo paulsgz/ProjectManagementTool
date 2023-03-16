@@ -141,4 +141,36 @@
     margin: 5px;
     text-align: center;
   }
+
+  .recent-tickets {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+  }
+  
+  .recent-tickets li {
+    display: flex;
+    text-align: left;
+    height: 50px;
+  }
+  
+  .bullet {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+    margin-right: 40px;
+  }
+  
+  .ticket-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ticket-description {
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
   

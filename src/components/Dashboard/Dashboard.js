@@ -9,9 +9,24 @@ import { IoCloudDone } from "react-icons/io5"
 import { FaUserCog } from "react-icons/fa"
 import "./Dashboard.css";
 
+const url = "http://localhost:5000/";
+
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(moment());
   const [developersList, setDevelopersList] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios(url);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     async function fetchDevelopers() {
@@ -56,6 +71,20 @@ const Dashboard = () => {
             <div className="card-body">
               <h5 className="card-title">Recent Tickets</h5>
               <p className="card-text">Keep track of your team's support requests and stay up to date with the latest issues.</p>
+              <ul className="recent-tickets">
+        {data
+          .sort((a, b) => moment(b.Date).diff(moment(a.Date)))
+          .slice(0, 5)
+          .map((ticket, index) => (
+            <li key={index}>
+              <span className="bullet"></span>
+              <div className="ticket-details">
+                <p className="ticket-description">{ticket.Description}</p>
+                <p className="ticket-date">{ticket.Date}</p>
+              </div>
+            </li>
+          ))}
+      </ul>
             </div>
           </div>
         </div>

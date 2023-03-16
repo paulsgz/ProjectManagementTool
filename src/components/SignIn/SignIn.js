@@ -49,7 +49,7 @@ function SignIn() {
         <Col
           md={6}
           className="d-flex align-items-center justify-content-center bg-white"
-          style={{ backgroundColor: "#d4d2d2" }}
+          style={{ backgroundColor: "#f3f2ef" }}
         >
           <div className="form-box">
             <Form onSubmit={handleSubmit}>
@@ -106,13 +106,12 @@ function SignIn() {
               </Button>
 
               {!isSignUp && (
-                <Button variant="secondary" onClick={toggleSignUp}>
-                  Sign Up
+                <Button variant="light" onClick={toggleSignUp}>
+                  Join now
                 </Button>
               )}
-
               {isSignUp && (
-                <Button variant="secondary" onClick={toggleSignUp}>
+                <Button variant="light" onClick={toggleSignUp}>
                   Sign In
                 </Button>
               )}
