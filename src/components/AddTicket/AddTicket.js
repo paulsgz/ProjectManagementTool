@@ -10,13 +10,17 @@ function AddTicket({ onTicketCreated }) {
   const [priority, setPriority] = useState("");
   const [status, setStatus] = useState("");
   const [developersList, setDevelopersList] = useState([]);
+  const [projectsList, setProjectsList] = useState([]);
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  
+  const [project, setProject] = useState("");
+
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get("http://localhost:5000/accounts");
+        const response2 = await axios.get("http://localhost:5000/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
+        setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
         console.error(error);
       }
@@ -25,8 +29,7 @@ function AddTicket({ onTicketCreated }) {
   }, []);
 
 
-
-
+  
   const sendData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -36,6 +39,7 @@ function AddTicket({ onTicketCreated }) {
     formData.append("priority", priority);
     formData.append("status", status);
     formData.append("date",date);
+    formData.append("project",project);
     const entries = formData.entries();
     const json = Object.fromEntries(Array.from(entries));
     console.log(json);
@@ -50,8 +54,9 @@ function AddTicket({ onTicketCreated }) {
           setDeveloper("");
           setPriority("");
           setStatus("");
+          setProject("");
           setDate(new Date().toISOString().slice(0, 10));
-          onTicketCreated(); // Call the onTicketCreated prop
+          onTicketCreated();
         } catch (err) {
           toast.error("Error creating ticket");
         }
@@ -130,6 +135,26 @@ function AddTicket({ onTicketCreated }) {
             <option value="Finished">Finished</option>
           </select>
         </label>
+        <label>
+          Project
+          <select
+            id="projects"
+            name="project"
+            value={project}
+            onChange={(e) => setProject(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Choose a project
+            </option>
+            {projectsList.map((project, index) => (
+              <option key={index} value={project}>
+                {project}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <button type="submit" className="create">Create</button>
       </form>
       <ToastContainer />

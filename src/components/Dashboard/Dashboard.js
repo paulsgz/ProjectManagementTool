@@ -7,6 +7,8 @@ import { GiProgression } from "react-icons/gi"
 import { SiCodereview } from "react-icons/si"
 import { IoCloudDone } from "react-icons/io5"
 import { FaUserCog } from "react-icons/fa"
+import ProgressBar from "react-progressbar";
+
 import "./Dashboard.css";
 
 const url = "http://localhost:5000/";
@@ -15,6 +17,7 @@ const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(moment());
   const [developersList, setDevelopersList] = useState([]);
   const [data, setData] = useState([]);
+  const [projectsList, setProjectsList] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +35,9 @@ const Dashboard = () => {
     async function fetchDevelopers() {
       try {
         const response = await axios.get("http://localhost:5000/accounts");
+        const response2 = await axios.get("http://localhost:5000/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
+        setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
         console.error(error);
       }
@@ -46,6 +51,36 @@ const Dashboard = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+
+  const projectProgress = {};
+
+  // Loop through each project in the filtered data
+    data.forEach((ticket) => {
+    const projectName = ticket.Project;
+    
+    // If the project does not exist in the progress object, add it
+    if (!projectProgress[projectName]) {
+      projectProgress[projectName] = {
+        totalTickets: 0,
+        finishedTickets: 0,
+        progress: 0
+      };
+    }
+    
+    // Update the total and finished tickets for the project
+    projectProgress[projectName].totalTickets++;
+    if (ticket.Status === "Finished") {
+      projectProgress[projectName].finishedTickets++;
+    }
+  });
+
+  for (const project in projectProgress) {
+    const totalTickets = projectProgress[project].totalTickets;
+    const finishedTickets = projectProgress[project].finishedTickets;
+    projectProgress[project].progress = Math.round((finishedTickets / totalTickets) * 100);
+  }
+
 
   return (
     <div className="container-fluid2">
@@ -93,6 +128,25 @@ const Dashboard = () => {
             <div className="card-body">
               <h5 className="card-title">Progress Tracker</h5>
               <p className="card-text">Easily track your project's progress with our intuitive progress tracker.</p>
+              <div>
+      {Object.entries(projectProgress).map(([projectName, progressData]) => (
+        <div key={projectName}>
+          <p className='title'>{projectName}</p>
+          <ProgressBar
+            completed={progressData.progress}
+            bgColor="#6EA8FF"
+            labelAlignment="center"
+            height="13px"
+            style={{ borderRadius: "5px" 
+
+          }}
+          />
+          <p>
+            {progressData.finishedTickets} out of {progressData.totalTickets} tickets finished
+          </p>
+        </div>
+      ))}
+    </div>
             </div>
           </div>
         </div>

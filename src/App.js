@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AddProject from "./components/Project/Project.js";
 import AddTicket from "./components/AddTicket/AddTicket.js";
 import CurrentTicket from "./components/CurrentTicket/CurrentTicket.js";
 import Sidebar from "./components/sideBar/sideBar.js";
@@ -10,6 +11,7 @@ import "./App.css";
 function App() {
   const [showAddTicket, setShowAddTicket] = useState(false);
   const [showCurrentTicket, setShowCurrentTicket] = useState(false);
+  const [showProject, setShowProject] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ function App() {
       navigate("/");
     }
   }, []);
-
+  
 
   const user = JSON.parse(sessionStorage.getItem("user")) || {};
   const { Name, Email, Role } = user.user || {};
@@ -38,19 +40,27 @@ function App() {
     } else {
       setShowAddTicket(true);
       setShowCurrentTicket(false);
+      setShowProject(false)
     }
   };
 
   const handleCurrentTicketClick = () => {
     setShowAddTicket(false);
     setShowCurrentTicket(true);
+    setShowProject(false)
   };
 
   const handleDashboardClick = () => {
     setShowAddTicket(false);
     setShowCurrentTicket(false);
+    setShowProject(false)
   };
 
+  const handleNewProjectClick = () => {
+    setShowProject(true)
+    setShowAddTicket(false);
+    setShowCurrentTicket(false);
+  };
   return (
     <div className="container-fluid">
       <div className="row">
@@ -60,10 +70,12 @@ function App() {
             onAddTicketClick={handleAddTicketClick}
             onCurrentTicketClick={handleCurrentTicketClick}
             onDashboardClick={handleDashboardClick}
+            onNewProjectClick={handleNewProjectClick}
           />
         </div>
         <div className="col-xl-10">
-          {!showAddTicket && !showCurrentTicket && <Dashboard />}
+          {!showAddTicket && !showCurrentTicket && !showProject && <Dashboard />}
+          {showProject &&  Role === "team leader" ? <AddProject /> : []}
           {showAddTicket && Role === "team leader" ? (
             <AddTicket onTicketCreated={handleTicketCreated} />
           ) : showCurrentTicket && <CurrentTicket />}

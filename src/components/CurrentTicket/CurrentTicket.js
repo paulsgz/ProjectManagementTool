@@ -15,7 +15,9 @@ function CurrentTicket() {
   const [developersList, setDevelopersList] = useState([]);
   const [ticketID, setTicketID] = useState("");
   const [sortOrder, setSortOrder] = useState("ascending");
-  
+  const [projectsList, setProjectsList] = useState(["All Projects"]);
+  const [filterBy, setFilterBy] = useState("All Projects")
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -32,7 +34,9 @@ function CurrentTicket() {
     async function fetchDevelopers() {
       try {
         const response = await axios.get("http://localhost:5000/accounts");
+        const response2 = await axios.get("http://localhost:5000/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
+        setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
         console.error(error);
       }
@@ -128,12 +132,22 @@ function CurrentTicket() {
     }
   });
 
+const filteredData =
+  filterBy === "All Projects"
+    ? sortedData
+    : sortedData.filter((ticket) => ticket.Project === filterBy);
 
 // Filter the tickets based on their status
-const todoTickets = sortedData.filter(ticket => ticket.Status === 'To do');
-const inProgressTickets = sortedData.filter(ticket => ticket.Status === 'In progress');
-const inReviewTickets = sortedData.filter(ticket => ticket.Status === 'In review');
-const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished');
+const todoTickets = filteredData.filter((ticket) => ticket.Status === "To do");
+const inProgressTickets = filteredData.filter(
+  (ticket) => ticket.Status === "In progress"
+);
+const inReviewTickets = filteredData.filter(
+  (ticket) => ticket.Status === "In review"
+);
+const finishedTickets = filteredData.filter(
+  (ticket) => ticket.Status === "Finished"
+);
 
 
   return (
@@ -142,6 +156,15 @@ const finishedTickets = sortedData.filter(ticket => ticket.Status === 'Finished'
       <button onClick={toggleSortOrder}>
         {sortOrder === "ascending" ? "Change Sort" : "Change Sort"}
       </button>
+      <select value={filterBy} onChange={(e) => setFilterBy(e.target.value)}>
+  <option value="All Projects">All Projects</option>
+  {projectsList.map((project, index) => (
+    <option key={index} value={project}>
+      {project}
+    </option>
+  ))}
+</select>
+
     </div>
 
       <div className="ticket-section">
