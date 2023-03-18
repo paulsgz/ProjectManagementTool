@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row">
-      <div className="col-md-3 col-xl-2 d-md-block d-none">
+      <div className="col-md-3 col-xl-2 d-md-block">
           <Sidebar
             user={user.user}
             onAddTicketClick={handleAddTicketClick}
