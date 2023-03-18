@@ -1,38 +1,105 @@
+/* Styles for the image */
+.bg-secondary img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.bg-secondary {
+  background-color: #fff !important;
+  object-fit: contain; /* or cover */
+  min-height: 100vh;
+}
+
+.leftPage {
+  height: 100vh;
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none !important;
+  padding: 50px;
+}
+
+.formBox {
+  min-height: 50%;
+  min-width: 50%;
+
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.header img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.signIn{
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.leftPage h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
 .FormGroup {
-    width: 100%;
+  margin-bottom: 20px;
+}
+
+.FormLabel {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.FormControl {
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.btn-light {
+  background-color: #fff;
+  border-color: #ccc;
+  color: #000;
+}
+
+.btn-light:hover {
+  background-color: #f1f1f1;
+  border-color: #adadad;
+  color: #000;
+}
+.welcomeTo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 4rem !important;
+  font-weight:400 !important;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.signUpForm h1 {
+  text-align: center;
+}
+@media only screen and (max-width: 1200px) {
+  .welcomeTo{
+    font-size: 2.7rem !important;
   }
-  
-  .FormControl {
-    width: 100%;
+}
+@media only screen and (max-width: 768px) {
+  .welcomeTo{
+    font-size: 2rem !important;
   }
-  
-  .container {
-    background-color: #f2f2f2;
-  }
-  
-  .form-box {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    padding: 30px;
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  h2 {
-    margin-bottom: 30px;
-  }
-  .Image {
-    background-color: red;
-    height: 100vh;
-  }
-  
-  @media (min-width: 768px) {
-    .h-100 {
-      min-height: 100vh;
-    }
-  }
+}

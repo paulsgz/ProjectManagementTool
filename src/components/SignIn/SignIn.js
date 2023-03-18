@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import signIn from "../../images/signIn.png";
+import logo from "../../images/logo.png";
 import "./SignIn.css";
 
 function SignIn() {
@@ -44,84 +46,98 @@ function SignIn() {
     }
   };
   return (
-    <Container fluid className="h-100">
+    <Container className="h-100 signIn">
       <Row className="h-100 align-items-center">
+      
         <Col
           md={6}
-          className="d-flex align-items-center justify-content-center bg-white"
-          style={{ backgroundColor: "#f3f2ef" }}
+          className="d-flex align-items-center justify-content-center bg-white leftPage"
+          style={{ backgroundColor: "#fff", borderRadius: "5px", boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)", padding: "30px", maxWidth: "600px", margin: "0 auto" }}
         >
-          <div className="form-box">
-            <Form onSubmit={handleSubmit}>
-              <h2>{formHeader}</h2>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+           <Col xs={12} className="header">
+              <img src = {logo} className="img-fluid"/>
+              <h2 className="welcomeTo">Welcome to your <br />Project Management Tool</h2>
+           </Col>
+          <div className="formBox">
+          <Form onSubmit={handleSubmit} style={{ width: "100%" }} className="signUpForm">
+            <h1 style={{ marginBottom: "30px"}}>{formHeader}</h1>
+            <Form.Group controlId="formBasicEmail" className="FormGroup">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                className="FormControl"
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword" className="FormGroup">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                className="FormControl"
+              />
+            </Form.Group>
+
+            {isSignUp && (
+              <Form.Group controlId="formBasicName" className="FormGroup">
+                <Form.Label>Full Name</Form.Label>
                 <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  type="text"
+                  placeholder="Enter name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  className="FormControl"
                 />
               </Form.Group>
+            )}
 
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+            {isSignUp && (
+              <Form.Group controlId="formBasicRole" className="FormGroup">
+                <Form.Label>Role</Form.Label>
                 <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
+                  as="select"
+                  value={role}
+                  onChange={(event) => setRole(event.target.value)}
+                  className="FormControl"
+                >
+                  <option value="">-- Select Role --</option>
+                  <option value="team leader">Team Leader</option>
+                  <option value="developer">Developer</option>
+                </Form.Control>
               </Form.Group>
+            )}
 
-              {isSignUp && (
-                <Form.Group controlId="formBasicName">
-                  <Form.Label>Full Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter name"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                  />
-                </Form.Group>
-              )}
+            <Button variant="primary" type="submit" className="Button primaryButton">
+              {formHeader}
+            </Button>
 
-              {isSignUp && (
-                <Form.Group controlId="formBasicRole">
-                  <Form.Label>Role</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={role}
-                    onChange={(event) => setRole(event.target.value)}
-                  >
-                    <option value="">-- Select Role --</option>
-                    <option value="team leader">Team Leader</option>
-                    <option value="developer">Developer</option>
-                  </Form.Control>
-                </Form.Group>
-              )}
-
-              <Button variant="primary" type="submit">
-                {formHeader}
+            {!isSignUp && (
+              <Button variant="light" onClick={toggleSignUp} className="Button secondaryButton">
+                Join now
               </Button>
+            )}
 
-              {!isSignUp && (
-                <Button variant="light" onClick={toggleSignUp}>
-                  Join now
-                </Button>
-              )}
-              {isSignUp && (
-                <Button variant="light" onClick={toggleSignUp}>
-                  Sign In
-                </Button>
-              )}
-            </Form>
+            {isSignUp && (
+              <Button variant="light" onClick={toggleSignUp} className="Button secondaryButton">
+                Sign In
+              </Button>
+            )}
+
+          </Form>
           </div>
         </Col>
-        <Col md={6} className="d-none d-md-flex bg-secondary align-items-center Image"></Col>
+        <Col md={6} className="d-none d-md-flex bg-secondary">
+          <img src ={signIn} className="img-fluid" alt="Responsive image"/>
+        </Col>
       </Row>
     </Container>
   );
+
 }
 
 export default SignIn;

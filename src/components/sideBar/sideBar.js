@@ -3,6 +3,7 @@ import "./sideBar.css";
 import { FaTachometerAlt, FaTicketAlt, FaPlus, FaSignOutAlt } from "react-icons/fa";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import logo from "../../images/logo.png";
 
 function Sidebar({ user, onAddTicketClick, onCurrentTicketClick, onDashboardClick, onNewProjectClick }) {
   const { Name } = user || {};
@@ -20,7 +21,7 @@ function Sidebar({ user, onAddTicketClick, onCurrentTicketClick, onDashboardClic
   return (
     <div className="sidebar">
       <div className="logo">
-        <h2>PMT Pro</h2>
+       <img src={logo} className="img-fluid" />
         <div className="profile">
           <h4>Hi {Name}</h4>
         </div>

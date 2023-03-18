@@ -14,6 +14,7 @@ function App() {
   const [showProject, setShowProject] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   useEffect(() => {
     const isAuthenticated = sessionStorage.getItem("user") !== null;
@@ -64,7 +65,7 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-xl-2">
+      <div className="col-md-3 col-xl-2 d-md-block d-none">
           <Sidebar
             user={user.user}
             onAddTicketClick={handleAddTicketClick}
@@ -73,7 +74,8 @@ function App() {
             onNewProjectClick={handleNewProjectClick}
           />
         </div>
-        <div className="col-xl-10">
+        <div className="col-md-9 col-xl-10 col-12 overflow-auto">
+          
           {!showAddTicket && !showCurrentTicket && !showProject && <Dashboard />}
           {showProject &&  Role === "team leader" ? <AddProject /> : []}
           {showAddTicket && Role === "team leader" ? (

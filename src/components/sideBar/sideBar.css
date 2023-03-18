@@ -63,6 +63,13 @@ li span {
   margin-left: 10px;
 }
 
+.logo img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
 @media only screen and (max-width: 600px) {
   .sidebar {
     width: 100%;
