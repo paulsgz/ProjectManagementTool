@@ -6,7 +6,7 @@
   margin: 0 auto;
 }
 .bg-secondary {
-  background-color: #fff !important;
+   background-color: #eff0f1 !important;
   object-fit: contain; /* or cover */
   min-height: 100vh;
 }

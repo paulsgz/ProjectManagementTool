@@ -51,8 +51,16 @@ function SignIn() {
       
         <Col
           md={6}
-          className="d-flex align-items-center justify-content-center bg-white leftPage"
-          style={{ backgroundColor: "#fff", borderRadius: "5px", boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)", padding: "30px", maxWidth: "600px", margin: "0 auto" }}
+          className="d-flex align-items-center justify-content-center leftPage"
+          style={{
+            backgroundColor: "#eff0f1",
+            borderRadius: "5px",
+            boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
+            padding: "1.5rem",
+            maxWidth: "600px",
+            margin: "0 auto",
+            minWidth: "300px",
+          }}
         >
            <Col xs={12} className="header">
               <img src = {logo} className="img-fluid"/>
@@ -60,7 +68,7 @@ function SignIn() {
            </Col>
           <div className="formBox">
           <Form onSubmit={handleSubmit} style={{ width: "100%" }} className="signUpForm">
-            <h1 style={{ marginBottom: "30px"}}>{formHeader}</h1>
+            <h1 style={{ marginBottom: "30px" } }>{formHeader}</h1>
             <Form.Group controlId="formBasicEmail" className="FormGroup">
               <Form.Label>Email address</Form.Label>
               <Form.Control
