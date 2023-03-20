@@ -4,6 +4,7 @@ import AddTicket from "./components/AddTicket/AddTicket.js";
 import CurrentTicket from "./components/CurrentTicket/CurrentTicket.js";
 import Sidebar from "./components/sideBar/sideBar.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
+import NavBar from "./components/navbar/navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
@@ -64,8 +65,14 @@ function App() {
   };
   return (
     <div className="container-fluid">
+      <NavBar
+      user={user.user}
+            onAddTicketClick={handleAddTicketClick}
+            onCurrentTicketClick={handleCurrentTicketClick}
+            onDashboardClick={handleDashboardClick}
+            onNewProjectClick={handleNewProjectClick} />
       <div className="row">
-      <div className="col-md-3 col-xl-2 d-md-block">
+      <div className="col-xl-2">
           <Sidebar
             user={user.user}
             onAddTicketClick={handleAddTicketClick}
@@ -74,7 +81,7 @@ function App() {
             onNewProjectClick={handleNewProjectClick}
           />
         </div>
-        <div className="col-md-9 col-xl-10 col-12 overflow-auto">
+        <div className="col-xl-10">
           
           {!showAddTicket && !showCurrentTicket && !showProject && <Dashboard />}
           {showProject &&  Role === "team leader" ? <AddProject /> : []}

@@ -81,3 +81,8 @@ button{
   .col-xl-2 {
     height: 100vh;
   }
+  @media screen and (max-width: 1200px) {
+    .col-xl-2 {
+      display: none;
+    }
+  }
