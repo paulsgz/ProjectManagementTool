@@ -17,6 +17,7 @@ function CurrentTicket() {
   const [sortOrder, setSortOrder] = useState("ascending");
   const [projectsList, setProjectsList] = useState(["All Projects"]);
   const [filterBy, setFilterBy] = useState("All Projects")
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     async function fetchData() {
@@ -84,9 +85,8 @@ function CurrentTicket() {
   };
 
 
-  // Filter the tickets based on their status
+// Filter the tickets based on their status
 // Sort the data array based on the priority key
-
 
 
   const toggleSortOrder = () => {
@@ -149,28 +149,41 @@ const finishedTickets = filteredData.filter(
   (ticket) => ticket.Status === "Finished"
 );
 
+function calculatePosition(container) {
+  const rect = container.getBoundingClientRect();
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+  const top = rect.top + scrollTop;
+  const left = rect.left + scrollLeft;
+  const width = container.offsetWidth;
+  const height = container.offsetHeight;
+  return { top, left, width, height };
+}
 
   return (
+    <>
     <div className="current-ticket">
+       <div className="container-fluid">
+        <div className="row firstRow">
     <div>
-      <button onClick={toggleSortOrder}>
-        {sortOrder === "ascending" ? "Change Sort" : "Change Sort"}
+      <button onClick={toggleSortOrder} className="btn-sm btn-primary sort">
+        {sortOrder === "ascending" ? "Sort Priority" : "Sort Priority"}
       </button>
-      <select value={filterBy} onChange={(e) => setFilterBy(e.target.value)}>
+      <select value={filterBy} onChange={(e) => setFilterBy(e.target.value)} className="form-select form-select-sm mb-3" >
   <option value="All Projects">All Projects</option>
   {projectsList.map((project, index) => (
     <option key={index} value={project}>
       {project}
     </option>
   ))}
-</select>
-
+</select> 
     </div>
-
-      <div className="ticket-section">
-        <h3>To Do</h3>
+</div>
+<div className="row">
+      <div className="col-xs-3 ticket-section">
+        <div className="headings"> <h3>To Do</h3></div>
         {todoTickets.map((ticket, index) => (
-          <div key={index} className="individual-ticket">
+        <div key={index} className={`ticket ${ticket.Priority === "Critical" ? "critical" : ticket.Priority === "High" ? "high" : ticket.Priority === "Medium" ? "medium" : "low"}`}>
              <button className="delete-ticket" onClick={() => deletePost(ticket._id)}>
              <i class="fa-sharp fa-solid fa-trash"></i>
             </button>
@@ -201,11 +214,10 @@ const finishedTickets = filteredData.filter(
         ))}
   </div>
 
-
-        <div className="ticket-section">
-          <h3>In Progress</h3>
+        <div className="col-xs-3  ticket-section">
+        <div className="headings">  <h3>In Progress</h3></div>
           {inProgressTickets.map((ticket, index) => (
-            <div key={index} className="individual-ticket">
+         <div key={index} className={`ticket ${ticket.Priority === "Critical" ? "critical" : ticket.Priority === "High" ? "high" : ticket.Priority === "Medium" ? "medium" : "low"}`}>
                <button className="delete-ticket" onClick={() => deletePost(ticket._id)}>
                <i class="fa-sharp fa-solid fa-trash"></i>
               </button>
@@ -237,10 +249,10 @@ const finishedTickets = filteredData.filter(
         </div>
 
 
-        <div className="ticket-section">
-          <h3>In Review</h3>
+        <div className="col-xs-3 ticket-section">
+        <div className="headings">  <h3>In Review</h3></div>
           {inReviewTickets.map((ticket, index) => (
-            <div key={index} className="individual-ticket">
+           <div key={index} className={`ticket ${ticket.Priority === "Critical" ? "critical" : ticket.Priority === "High" ? "high" : ticket.Priority === "Medium" ? "medium" : "low"}`}>
                <button className="delete-ticket" onClick={() => deletePost(ticket._id)}>
                <i class="fa-sharp fa-solid fa-trash"></i>
               </button>
@@ -272,10 +284,10 @@ const finishedTickets = filteredData.filter(
         </div>
 
 
-        <div className="ticket-section">  
-          <h3>Finished</h3>
+        <div className="col-xs-3  ticket-section">  
+        <div className="headings"> <h3>Finished</h3></div>
           {finishedTickets.map((ticket, index) => (
-            <div key={index} className="individual-ticket">
+          <div key={index} className={`ticket ${ticket.Priority === "Critical" ? "critical" : ticket.Priority === "High" ? "high" : ticket.Priority === "Medium" ? "medium" : "low"}`}>
               <button className="delete-ticket" onClick={() => deletePost(ticket._id)}>
               <i class="fa-sharp fa-solid fa-trash"></i>
               </button>
@@ -306,13 +318,27 @@ const finishedTickets = filteredData.filter(
           ))}
         </div>
 
-        <Modal
+       
+  </div>
+  </div>
+  </div>
+  <Modal
       isOpen={showModal}
       onRequestClose={closeModal}
       contentLabel="Edit Ticket"
       className="Modal"
+      style={{
+        position: 'fixed',
+        top: modalPosition.top + modalPosition.height / 2,
+        left: modalPosition.left + modalPosition.width / 2,
+        transform: 'translate(-50%, -50%)',
+        zIndex: 9999,
+      }}
     >
+      <div className="Edit-ticket">
       <h4>Edit Ticket</h4>
+      </div>
+
       <form className="addForm" onSubmit={e => { e.preventDefault(); saveEdit(ticketID) }}>
       <label>
         Description
@@ -382,13 +408,11 @@ const finishedTickets = filteredData.filter(
           <option value="Finished">Finished</option>
         </select>
       </label>
-      <button type="submit">Save</button>
-      <button onClick={closeModal}>Cancel</button>
+      <button type="submit" className="btn btn-primary">Save</button>
+      <button onClick={closeModal} className="btn btn-danger">Cancel</button>
     </form>
   </Modal>
-
-
-      </div>
+  </>
     );
   }
 export default CurrentTicket;

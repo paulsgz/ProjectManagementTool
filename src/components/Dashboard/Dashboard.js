@@ -92,7 +92,7 @@ const Dashboard = () => {
       </div>
 
       <div className="row row1">
-        <div className='col-sm-4'>
+        <div className='col-md-4'>
           <div className="card card-welcome">
             <div className="card-body">
               <h5 className="card-title">Welcome to PMT Pro</h5>
@@ -101,7 +101,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className='col-sm-4'>
+        <div className='col-md-4'>
           <div className="card card-welcome">
             <div className="card-body">
               <h5 className="card-title">Recent Tickets</h5>
@@ -111,7 +111,7 @@ const Dashboard = () => {
           .sort((a, b) => moment(b.Date).diff(moment(a.Date)))
           .slice(0, 5)
           .map((ticket, index) => (
-            <li key={index}>
+            <li key={index} className="tickets">
               <span className="bullet"></span>
               <div className="ticket-details">
                 <p className="ticket-description">{ticket.Description}</p>
@@ -123,7 +123,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className='col-sm-4'>
+        <div className='col-md-4'>
           <div className="card card-welcome">
             <div className="card-body">
               <h5 className="card-title">Progress Tracker</h5>

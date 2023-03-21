@@ -8,7 +8,6 @@
 }
 
 .ticket-section {
-  width: 23%;
   padding: 10px;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -17,12 +16,11 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow-y: auto;
-}
+} 
 .ticket-section h3 {
   text-align: center;
-}
 
+}
 .individual-ticket {
   border: 1px solid black;
   border-radius: 5px;
@@ -51,16 +49,73 @@ p {
 span {
   font-weight: bold;
   
-}
+}  
 .Modal {
-  background-color: red;
-  height: 70%;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 10%;
-  left:40%;
+  background-color: #fff;
+  border-radius: 15px;
+  border: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 50%;
+}
+.Edit-ticket{
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+}
+.firstRow {
+  min-height: 100px;
+}
+.sort {
+  margin: 20px 0px 10px 0px;
+}
+.sort:active{
+  background-color: white !important;
+  color: blue !important;
+}
+.form-select {
+  max-width: 300px;
+}
+.critical {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative; /* add position relative */
+  padding-right: 30px;
+  font: 15px;
+  background-color: rgb(255, 117, 117);
+}
+.high {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative; /* add position relative */
+  padding-right: 30px;
+  font: 15px;
+  background-color: orange;
+}
+.medium {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative; /* add position relative */
+  padding-right: 30px;
+  font: 15px;
+  background-color: yellow;
+}
+.low {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative; /* add position relative */
+  padding-right: 30px;
+  font: 15px;
+  background-color: green;
 }

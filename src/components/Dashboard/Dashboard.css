@@ -7,7 +7,7 @@
   }
   
   .color {
-    height: 20%;
+    min-height: 20%;
     background-color: blue;
     position: relative;
     display: flex;
@@ -31,16 +31,16 @@
     color: white;
   }
   .col-sm-4 .card {
-    height: 400px;
+    min-height: 400px;
     margin-top: -50px;
   }
   .col-sm-3 .card {
-    height: 150px;
+    min-height: 150px;
     margin-top: 10px;
     cursor: pointer;
   }
   .col-sm-12 .card {
-    max-height: 200px;
+    min-height: 200px;
     margin-top: 0px;
   }
 
@@ -151,7 +151,8 @@
   .recent-tickets li {
     display: flex;
     text-align: left;
-    height: 50px;
+    min-height: 30px;
+    padding: 8px;
   }
   
   .bullet {
@@ -165,9 +166,9 @@
   
   .ticket-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+
   }
-  
   .ticket-description {
     font-weight: bold;
     font-size: 12px;
@@ -187,3 +188,54 @@
   .title{
     font-size: 16px;
   }
+  @media screen and (max-width: 950px) {
+    .developer-list {
+      flex-direction:column;
+    }
+    .developer-item {
+      margin-bottom: 5px;
+      padding: 0px;  
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px;
+      text-align: center !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .dashboard-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      margin-top: 10px;
+    }
+    .time-date {
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+  }
+  /* @media screen and (max-width: 1500px) {
+    .card-title{
+        font-size: 20px !important;
+    }
+    .card-text{
+      font-size: 20px;
+    }
+    .ticket-description {
+      font-size: 1.2vw !important;
+    }
+    .ticket-date{
+      font-size: 14px !important;
+    }
+    .tickets{
+      margin-bottom: 5px;
+    }
+  } */
