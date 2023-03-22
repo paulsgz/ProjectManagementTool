@@ -1,4 +1,7 @@
 /* Styles for the image */
+.formBox{
+  padding: 5%;
+}
 .bg-secondary img {
   display: block;
   max-width: 100%;
@@ -43,6 +46,9 @@
 .signIn{
   min-height: 100vh;
   min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leftPage h2 {
@@ -63,18 +69,17 @@
   font-size: 1.5rem;
   padding: 10px;
 }
-
 .btn {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: bold;
-  padding: 10px 20px;
-  margin-right: 10px;
+  margin-right: clamp(5px, 1vw, 10px);
 }
 
 .btn-light {
   background-color: #fff;
   border-color: #ccc;
   color: #000;
+  transition: all 0.3s ease;
 }
 
 .btn-light:hover {
@@ -92,7 +97,15 @@
 }
 .signUpForm h1 {
   text-align: center;
+  font-size: clamp(2rem, 5vw, 4rem);
 }
+.FormLabel, .FormControl {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+.FormGroup {
+  margin-bottom: clamp(10px, 2vw, 20px);
+}
+
 @media only screen and (max-width: 1200px) {
   .welcomeTo{
     font-size: 2.7rem !important;

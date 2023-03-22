@@ -134,7 +134,7 @@ const Dashboard = () => {
           <p className='title'>{projectName}</p>
           <ProgressBar
             completed={progressData.progress}
-            bgColor="#6EA8FF"
+            bgcolor="#6EA8FF"
             labelAlignment="center"
             height="13px"
             style={{ borderRadius: "5px" 

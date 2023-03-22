@@ -42,14 +42,13 @@ function AddTicket({ onTicketCreated }) {
     formData.append("project",project);
     const entries = formData.entries();
     const json = Object.fromEntries(Array.from(entries));
-    console.log(json);
   
    
       const shouldSend = window.confirm("Are you sure you want to create this ticket?");
       if (shouldSend) {
         try {
           await axios.post("http://localhost:5000/create", json);
-          toast.success("Ticket created successfully");
+          alert("Ticket created successfully");
           setDescription("");
           setDeveloper("");
           setPriority("");
@@ -57,8 +56,9 @@ function AddTicket({ onTicketCreated }) {
           setProject("");
           setDate(new Date().toISOString().slice(0, 10));
           onTicketCreated();
+          window.location.reload();
         } catch (err) {
-          toast.error("Error creating ticket");
+          alert("Error creating ticket");
         }
       }
   };
@@ -66,10 +66,12 @@ function AddTicket({ onTicketCreated }) {
 
   return (
     <div className="add-ticket">
-      <form className="addForm" onSubmit={sendData}>
-        <label>
+      <form className="addForm2" onSubmit={sendData}>
+        <div className="form-group">
+        <label >
           Description
           <input
+            className="form-control form-control-lg"
             id="description"
             name="description"
             type="text"
@@ -80,9 +82,12 @@ function AddTicket({ onTicketCreated }) {
             autoComplete="off"
           />
         </label>
+        </div>
+        <div className="form-group">
         <label>
           Assign To
           <select
+            className="form-control form-control-lg"
             id="developers"
             name="developer"
             value={developer}
@@ -99,9 +104,12 @@ function AddTicket({ onTicketCreated }) {
             ))}
           </select>
         </label>
+        </div>
+        <div className="form-group">
         <label>
           Priority
           <select
+            className="form-control form-control-lg"
             name="priority"
             id="priority"
             value={priority}
@@ -117,9 +125,12 @@ function AddTicket({ onTicketCreated }) {
             <option value="Critical">Critical</option>
           </select>
         </label>
+        </div>
+        <div className="form-group">
         <label>
           Status
           <select
+            className="form-control form-control-lg"
             name="status"
             id="status"
             value={status}
@@ -135,9 +146,12 @@ function AddTicket({ onTicketCreated }) {
             <option value="Finished">Finished</option>
           </select>
         </label>
+        </div>
+        <div className="form-group">
         <label>
           Project
           <select
+            className="form-control form-control-lg"
             id="projects"
             name="project"
             value={project}
@@ -154,10 +168,9 @@ function AddTicket({ onTicketCreated }) {
             ))}
           </select>
         </label>
-
-        <button type="submit" className="create">Create</button>
+         </div>
+        <button type="submit" className="btn btn-primary create">Create</button>
       </form>
-      <ToastContainer />
     </div>
   );
 }

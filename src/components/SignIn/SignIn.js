@@ -45,9 +45,29 @@ function SignIn() {
       console.log(error);
     }
   };
+
+
+  const handleGuestLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/login', {
+        email: 'teamleader@example.com',
+        password: 'teamleader'
+      });
+
+      // Pass the user data to the App component
+      // Store the user data in session storage
+      sessionStorage.setItem('user', JSON.stringify(response.data));
+
+      // Redirect to the App component
+      navigate("/app");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Container className="h-100 signIn">
-      <Row className="h-100 align-items-center">
+    <Container className="signIn">
+      <Row className="align-items-center leftContent">
       
         <Col
           md={6}
@@ -120,23 +140,27 @@ function SignIn() {
               </Form.Group>
             )}
 
-            <Button variant="primary" type="submit" className="Button primaryButton">
+            <button variant="primary" type="submit" className="btn btn-primary">
               {formHeader}
-            </Button>
+            </button>
 
             {!isSignUp && (
-              <Button variant="light" onClick={toggleSignUp} className="Button secondaryButton">
+              <button onClick={toggleSignUp} className="btn btn-secondary">
                 Join now
-              </Button>
+              </button>
             )}
 
             {isSignUp && (
-              <Button variant="light" onClick={toggleSignUp} className="Button secondaryButton">
+              <button onClick={toggleSignUp} className="btn btn-secondary">
                 Sign In
-              </Button>
+              </button>
             )}
 
           </Form>
+          <hr></hr>
+          <button onClick={(handleGuestLogin)} className="btn btn-success">
+                Sign In as Guest
+              </button>
           </div>
         </Col>
         <Col md={6} className="d-none d-md-flex bg-secondary">

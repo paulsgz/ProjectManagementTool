@@ -1,55 +1,39 @@
-form {
-    text-align: left;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .add-ticket{
-    width: 60%;
-    height: 100%;
-  }
-  form label,
-  label input,
-  label select {
-    display: block;
-    text-align: left;
-  }
-  
-  label input,
-  label select {
-    width: 100%;
-    padding: 15px;
-    margin-top: 10px;
-  }
-  
-  #description {
-    width: 96%;
-  }
-  
-  form label {
-    margin-top: 20px;
-  }
-  
-  form button {
-    border-radius: 5px;
-    background: #007ae6;
-    color: #fff;
-    border: none;
-    -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
-    -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
-    padding: 15px 30px;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  .create {
-    width: 120px;
-  }
-  .create:active {
-    background-color: #fff;
-    color: #007ae6;
-  }
-  
+.add-ticket{
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+  min-height: 60%;
+  min-width: 60%;
+}
+
+.addForm2 label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.addForm2 select, .addForm2 input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.addForm2 button.create {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addForm2 button.create:hover {
+  background-color: #0062cc;
+}
