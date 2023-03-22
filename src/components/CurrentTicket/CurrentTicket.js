@@ -22,14 +22,26 @@ function CurrentTicket() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios(url);
+        const response = await axios.get("http://localhost:5000");
         setData(response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     fetchData();
   }, []);
+  
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:5000");
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [data]);
 
   useEffect(() => {
     async function fetchDevelopers() {
@@ -45,19 +57,21 @@ function CurrentTicket() {
     fetchDevelopers();
   }, []);
 
-  const deletePost = async (id) => {
-    const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
-    if (shouldDelete) {
-      try {
-        await axios.delete(`http://localhost:5000/${id}`);
-        setData((prevData) => prevData.filter((ticket) => ticket._id !== id));
-        alert("Ticket deleted successfully!");
-      } catch (error) {
-        console.log(error);
-        alert("An error occurred while deleting the ticket.");
-      }
+const deletePost = async (id) => {
+  const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
+  if (shouldDelete) {
+    try {
+      await axios.delete(`http://localhost:5000/${id}`);
+      alert("Ticket deleted successfully!");
+      setData((prevData) => prevData.filter((ticket) => ticket._id !== id));
+      const response = await axios.get("http://localhost:5000");
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred while deleting the ticket.");
     }
-  };
+  }
+}
 
   const openModal = (id) => {
     setTicketID(id);
