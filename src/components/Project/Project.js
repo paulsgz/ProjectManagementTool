@@ -89,7 +89,6 @@ function AddProject() {
         {projectsList.map((project, index) => (
           <div className="project-card" key={index}>
             <h3>{project.Name}</h3>
-            <button className="btn btn-primary">Edit</button>
             <button className="btn btn-danger" onClick={()=>deleteProject(project._id)}>Delete</button>
           </div>
         ))}
