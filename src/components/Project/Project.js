@@ -11,7 +11,7 @@ function AddProject() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response2 = await axios.get("http://localhost:5000/projects");
+        const response2 = await axios.get("https://pmtserver.onrender.com/projects");
         setProjectsList(response2.data.map((project) => project));
       } catch (error) {
         console.error(error);
@@ -32,10 +32,10 @@ function AddProject() {
       const shouldSend = window.confirm("Are you sure you want to create new project?");
       if (shouldSend) {
         try {
-          await axios.post("http://localhost:5000/createProject", json);
+          await axios.post("https://pmtserver.onrender.com/createProject", json);
           toast.success("Project created successfully");
           setProject("");
-          const response = await axios.get("http://localhost:5000/projects");
+          const response = await axios.get("https://pmtserver.onrender.com/projects");
           setProjectsList(response.data);
         } catch (err) {
           toast.error("Error creating project");
@@ -48,7 +48,7 @@ function AddProject() {
     const shouldDelete = window.confirm("Are you sure you want to delete this project?");
     if (shouldDelete) {
       try {
-        await axios.delete(`http://localhost:5000/projects/${id}`);
+        await axios.delete(`https://pmtserver.onrender.com/projects/${id}`);
         setProjectsList((prevData) => prevData.filter((project) => project._id !== id));
         alert("Ticket deleted successfully!");
       } catch (error) {

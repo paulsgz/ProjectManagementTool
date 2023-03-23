@@ -17,8 +17,8 @@ function AddTicket({ onTicketCreated }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:5000/accounts");
-        const response2 = await axios.get("http://localhost:5000/projects");
+        const response = await axios.get("https://pmtserver.onrender.com/accounts");
+        const response2 = await axios.get("https://pmtserver.onrender.com/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
         setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
@@ -47,7 +47,7 @@ function AddTicket({ onTicketCreated }) {
       const shouldSend = window.confirm("Are you sure you want to create this ticket?");
       if (shouldSend) {
         try {
-          await axios.post("http://localhost:5000/create", json);
+          await axios.post("https://pmtserver.onrender.com/create", json);
           alert("Ticket created successfully");
           setDescription("");
           setDeveloper("");

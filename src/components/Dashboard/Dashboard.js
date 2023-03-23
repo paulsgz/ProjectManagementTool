@@ -11,7 +11,7 @@ import ProgressBar from "react-progressbar";
 
 import "./Dashboard.css";
 
-const url = "http://localhost:5000/";
+const url = "https://pmtserver.onrender.com";
 
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(moment());
@@ -34,8 +34,8 @@ const Dashboard = () => {
   useEffect(() => {
     async function fetchDevelopers() {
       try {
-        const response = await axios.get("http://localhost:5000/accounts");
-        const response2 = await axios.get("http://localhost:5000/projects");
+        const response = await axios.get("https://pmtserver.onrender.com/accounts");
+        const response2 = await axios.get("https://pmtserver.onrender.com/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
         setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {

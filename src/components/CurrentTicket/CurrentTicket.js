@@ -3,7 +3,7 @@ import "./CurrentTicket.css";
 import axios from "axios";
 import Modal from 'react-modal';
 
-const url = "http://localhost:5000/";
+const url = "https://pmtserver.onrender.com";
 
 function CurrentTicket() {
   const [data, setData] = useState([]);
@@ -22,7 +22,7 @@ function CurrentTicket() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:5000");
+        const response = await axios.get("https://pmtserver.onrender.com");
         setData(response.data);
       } catch (error) {
         console.error(error);
@@ -34,7 +34,7 @@ function CurrentTicket() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:5000");
+        const response = await axios.get("https://pmtserver.onrender.com");
         setData(response.data);
       } catch (error) {
         console.error(error);
@@ -46,8 +46,8 @@ function CurrentTicket() {
   useEffect(() => {
     async function fetchDevelopers() {
       try {
-        const response = await axios.get("http://localhost:5000/accounts");
-        const response2 = await axios.get("http://localhost:5000/projects");
+        const response = await axios.get("https://pmtserver.onrender.com/accounts");
+        const response2 = await axios.get("https://pmtserver.onrender.com/projects");
         setDevelopersList(response.data.map((developer) => developer.Name));
         setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
@@ -61,10 +61,10 @@ const deletePost = async (id) => {
   const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
   if (shouldDelete) {
     try {
-      await axios.delete(`http://localhost:5000/${id}`);
+      await axios.delete(`https://pmtserver.onrender.com/${id}`);
       alert("Ticket deleted successfully!");
       setData((prevData) => prevData.filter((ticket) => ticket._id !== id));
-      const response = await axios.get("http://localhost:5000");
+      const response = await axios.get("https://pmtserver.onrender.com");
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -82,7 +82,7 @@ const deletePost = async (id) => {
 
   const saveEdit = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/${id}`, {
+      await axios.patch(`https://pmtserver.onrender.com/${id}`, {
         description: description,
         developer: developer,
         priority: priority,
