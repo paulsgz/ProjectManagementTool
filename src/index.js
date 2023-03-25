@@ -17,7 +17,7 @@ function Index() {
   React.useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
