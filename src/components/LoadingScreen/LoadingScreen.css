@@ -1,0 +1,13 @@
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+  }
+  
+  .logo {
+    width: 200px; // Replace with your own logo width
+  }
+  
