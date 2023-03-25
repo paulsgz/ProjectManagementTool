@@ -7,7 +7,7 @@ import {BrowserRouter as Router } from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom'
 import SignIn from "./components/SignIn/SignIn.js";
 import 'bootstrap/dist/css/bootstrap.css';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
