@@ -70,7 +70,7 @@ function SignIn() {
       <Row className="align-items-center leftContent">
       
         <Col
-          md={6}
+          md={12}
           className="d-flex align-items-center justify-content-center leftPage"
           style={{
             backgroundColor: "#eff0f1",
@@ -162,9 +162,6 @@ function SignIn() {
                 Sign In as Guest
               </button>
           </div>
-        </Col>
-        <Col md={6} className="d-none d-md-flex bg-secondary">
-          <img src ={signIn} className="img-fluid" alt="Responsive image"/>
         </Col>
       </Row>
     </Container>

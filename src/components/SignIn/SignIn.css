@@ -105,7 +105,6 @@
 .FormGroup {
   margin-bottom: clamp(10px, 2vw, 20px);
 }
-
 @media only screen and (max-width: 1200px) {
   .welcomeTo{
     font-size: 2.7rem !important;

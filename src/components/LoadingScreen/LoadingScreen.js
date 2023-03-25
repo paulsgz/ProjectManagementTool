@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoadingScreen.css';
-import logo from "../../images/logo.png"; // Replace with your own logo image file
+import logo from "../../images/logo.png";
 
 function LoadingScreen() {
     React.useEffect(() => {
@@ -14,7 +14,7 @@ function LoadingScreen() {
             setTimeout(() => {
               document.querySelector('.loading-screen').style.opacity = '0';
               setTimeout(() => {
-                window.location.href = '/app';
+                window.location.href = '/';
               }, 1000); // Change 1000 to the desired delay in milliseconds
             }, 1000); // Change 1000 to the desired delay in milliseconds
           }, 1000); // Change 1000 to the desired delay in milliseconds
