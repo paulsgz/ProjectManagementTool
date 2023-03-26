@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -13,6 +13,14 @@ function SignIn() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [formHeader, setFormHeader] = useState("Sign In");
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // add the visible class after a delay of 0.5 seconds
+    setTimeout(() => {
+      setVisible(true);
+    }, 500);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -66,12 +74,10 @@ function SignIn() {
   };
 
   return (
-    <Container className="signIn">
+    <Container className={`signIn ${visible ? "visible" : ""}`}>
       <Row className="align-items-center leftContent">
-      
         <Col
-          md={12}
-          className="d-flex align-items-center justify-content-center leftPage"
+          className="col-xl-12 leftPage"
           style={{
             backgroundColor: "#eff0f1",
             borderRadius: "5px",

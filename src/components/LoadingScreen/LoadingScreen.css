@@ -1,18 +1,22 @@
 .loading-screen {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    opacity: 1;
-    transition: opacity 2s ease-out; /* Change the duration to 2s */
-  }
-  
-  .logo {
-    opacity: 0;
-    transition: opacity 1s ease-out, filter 1s ease-out;
-    filter: blur(10px);
-    max-width: 200px; 
-  }
-  
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  opacity: 1;
+  transition: opacity 2s ease-out; /* Change the duration to 2s */
+}
+
+.logo {
+  opacity: 0;
+  transition: opacity 1s ease-out, filter 1s ease-out;
+  filter: blur(10px);
+  max-width: 175px;
+  max-height: 175px;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

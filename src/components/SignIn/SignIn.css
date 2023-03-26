@@ -1,117 +1,77 @@
-/* Styles for the image */
-.formBox{
-  padding: 5%;
+.signIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
-.bg-secondary img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-.bg-secondary {
-  background-color: #eff0f1 !important;
-  object-fit: cover; /* or cover */
-  min-height: 100vh;
+
+.signIn.visible {
+  opacity: 1;
 }
 
 .leftPage {
-  height: 100vh;
-  min-width: 50vw;
   display: flex;
   flex-direction: column;
-  box-shadow: none !important;
-  padding: 50px;
+  align-items: center;
 }
 
-.formBox {
-  min-height: 50%;
-  min-width: 50%;
-
-}
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .header img {
-  width: 100%;
-  max-width: 200px;
+  width: 120px;
   height: auto;
-  margin-bottom: 40px;
+  margin-bottom: 1rem;
 }
 
-.signIn{
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.2;
 }
 
-.leftPage h2 {
-  font-size: 3rem;
-  margin-bottom: 30px;
+.welcomeTo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.formBox {
+  width: 100%;
 }
 
 .FormGroup {
-  margin-bottom: 20px;
-}
-
-.FormLabel {
-  font-size: 1.5rem;
-  font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
 .FormControl {
-  font-size: 1.5rem;
-  padding: 10px;
-}
-.btn {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: bold;
-  margin-right: clamp(5px, 1vw, 10px);
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
 }
 
-.btn-light {
-  background-color: #fff;
-  border-color: #ccc;
-  color: #000;
-  transition: all 0.3s ease;
+.btn-primary {
+  margin-right: 1rem;
 }
 
-.btn-light:hover {
-  background-color: #f1f1f1;
-  border-color: #adadad;
-  color: #000;
+.btn-secondary {
+  margin-left: 1rem;
 }
-.welcomeTo {
-  font-family: 'Roboto', sans-serif;
-  font-size: 4rem !important;
-  font-weight:400 !important;
-  color: #333333;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.signUpForm h1 {
-  text-align: center;
-  font-size: clamp(2rem, 5vw, 4rem);
-}
-.FormLabel, .FormControl {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-}
-.FormGroup {
-  margin-bottom: clamp(10px, 2vw, 20px);
-}
-@media only screen and (max-width: 1200px) {
-  .welcomeTo{
-    font-size: 2.7rem !important;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .welcomeTo{
-    font-size: 2rem !important;
+
+@media (min-width: 576px) {
+  .leftContent {
+    justify-content: center;
   }
 }
