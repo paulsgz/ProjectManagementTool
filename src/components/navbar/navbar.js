@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FaTachometerAlt, FaTicketAlt, FaPlus, FaSignOutAlt } from "react-icons/fa";
 import { AiFillFolderOpen } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
-import { motion } from "framer-motion";
-import { HiMenuAlt4, HiX } from "react-icons/hi";
 import "./navbar.css";
 
 
