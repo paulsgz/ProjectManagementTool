@@ -20,8 +20,8 @@ function Sidebar({ user, onAddTicketClick, onCurrentTicketClick, onDashboardClic
 
   return (
     <div className="sidebar">
-      <div className="logo">
-        <img src={logo} alt="logo" />
+      <div className="Sidelogo">
+        <img src={logo} className="img-fluid" alt="logo" />
         <div className="profile">
           <h4>Hi {Name}</h4>
         </div>
