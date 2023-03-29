@@ -63,7 +63,7 @@ function SignIn() {
         email: 'teamleader@example.com',
         password: 'teamleader'
       });
-
+      setLoading(true);
       // Pass the user data to the App component
       // Store the user data in session storage
       sessionStorage.setItem('user', JSON.stringify(response.data));
@@ -72,6 +72,7 @@ function SignIn() {
       navigate("/app");
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
