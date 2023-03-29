@@ -69,7 +69,12 @@ h1 {
 .btn-secondary {
   margin-left: 1rem;
 }
-
+.spinner {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
 @media (min-width: 576px) {
   .leftContent {
     justify-content: center;

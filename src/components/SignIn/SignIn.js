@@ -5,7 +5,7 @@ import axios from "axios";
 import signIn from "../../images/signIn.png";
 import logo from "../../images/logo.png";
 import "./SignIn.css";
-
+import { Spinner } from "react-bootstrap"
 function SignIn() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -14,6 +14,7 @@ function SignIn() {
   const [role, setRole] = useState("");
   const [formHeader, setFormHeader] = useState("Sign In");
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // add the visible class after a delay of 0.5 seconds
@@ -30,7 +31,7 @@ function SignIn() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+    setLoading(true);
     try {
       const response = await axios.post(
         isSignUp ? 'https://pmtserver.onrender.com/createAccounts' : 'https://pmtserver.onrender.com/login',
@@ -51,6 +52,7 @@ function SignIn() {
   
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -103,6 +105,7 @@ function SignIn() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className="FormControl"
+                required
               />
             </Form.Group>
 
@@ -114,6 +117,7 @@ function SignIn() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="FormControl"
+                required
               />
             </Form.Group>
 
@@ -126,6 +130,7 @@ function SignIn() {
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   className="FormControl"
+                  required
                 />
               </Form.Group>
             )}
@@ -138,6 +143,7 @@ function SignIn() {
                   value={role}
                   onChange={(event) => setRole(event.target.value)}
                   className="FormControl"
+                  required
                 >
                   <option value="">-- Select Role --</option>
                   <option value="team leader">Team Leader</option>
@@ -166,7 +172,8 @@ function SignIn() {
           <hr></hr>
           <button onClick={(handleGuestLogin)} className="btn btn-success">
                 Sign In as Guest
-              </button>
+          </button>
+          <div className="spinner"> { loading && <Spinner />}</div>
           </div>
         </Col>
       </Row>
