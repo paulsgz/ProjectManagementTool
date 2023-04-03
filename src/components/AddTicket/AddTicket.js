@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./AddTicket.css";
 
 function AddTicket({ onTicketCreated }) {
+  // Declare state variables for form inputs
   const [description, setDescription] = useState("");
   const [developer, setDeveloper] = useState("");
   const [priority, setPriority] = useState("");
@@ -13,11 +14,15 @@ function AddTicket({ onTicketCreated }) {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [project, setProject] = useState("");
 
+  // Fetch developers and projects list on component mount
   useEffect(() => {
     async function fetchData() {
       try {
+        // Make API requests to get list of developers and projects
         const response = await axios.get("https://pmtserver.onrender.com/accounts");
         const response2 = await axios.get("https://pmtserver.onrender.com/projects");
+        
+        // Update state variables with list of developers and projects
         setDevelopersList(response.data.map((developer) => developer.Name));
         setProjectsList(response2.data.map((project) => project.Name));
       } catch (error) {
@@ -27,8 +32,7 @@ function AddTicket({ onTicketCreated }) {
     fetchData();
   }, []);
 
-
-  
+  // Send form data to server on form submission
   const sendData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -39,28 +43,34 @@ function AddTicket({ onTicketCreated }) {
     formData.append("status", status);
     formData.append("date",date);
     formData.append("project",project);
+    
+    // Convert FormData object to JSON object
     const entries = formData.entries();
     const json = Object.fromEntries(Array.from(entries));
   
-   
-      const shouldSend = window.confirm("Are you sure you want to create this ticket?");
-      if (shouldSend) {
-        try {
-          await axios.post("https://pmtserver.onrender.com/create", json);
-          alert("Ticket created successfully");
-          setDescription("");
-          setDeveloper("");
-          setPriority("");
-          setStatus("");
-          setProject("");
-          setDate(new Date().toISOString().slice(0, 10));
-          onTicketCreated();
-          window.location.reload();
-        } catch (err) {
-          alert("Error creating ticket");
-        }
+    // Display confirmation dialog before submitting form data to server
+    const shouldSend = window.confirm("Are you sure you want to create this ticket?");
+    if (shouldSend) {
+      try {
+        // Make API request to create new ticket on server
+        await axios.post("https://pmtserver.onrender.com/create", json);
+        alert("Ticket created successfully");
+        
+        // Reset form inputs and reload page
+        setDescription("");
+        setDeveloper("");
+        setPriority("");
+        setStatus("");
+        setProject("");
+        setDate(new Date().toISOString().slice(0, 10));
+        onTicketCreated();
+        window.location.reload();
+      } catch (err) {
+        alert("Error creating ticket");
       }
+    }
   };
+  
   
 
   return (
