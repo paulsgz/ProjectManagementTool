@@ -6,19 +6,20 @@ import Modal from 'react-modal';
 const url = "https://pmtserver.onrender.com";
 
 function CurrentTicket() {
-  const [data, setData] = useState([]);
-  const [description, setDescription] = useState("");
-  const [developer, setDeveloper] = useState("");
-  const [priority, setPriority] = useState("");
-  const [status, setStatus] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [developersList, setDevelopersList] = useState([]);
-  const [ticketID, setTicketID] = useState("");
-  const [sortOrder, setSortOrder] = useState("ascending");
-  const [projectsList, setProjectsList] = useState(["All Projects"]);
-  const [filterBy, setFilterBy] = useState("All Projects")
-  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  // States
+  const [data, setData] = useState([]); // Store data retrieved from the server
+  const [description, setDescription] = useState(""); // Store the new description input
+  const [developer, setDeveloper] = useState(""); // Store the new developer input
+  const [priority, setPriority] = useState(""); // Store the new priority input
+  const [status, setStatus] = useState(""); // Store the new status input
+  const [showModal, setShowModal] = useState(false); // Control the visibility of the edit modal
+  const [developersList, setDevelopersList] = useState([]); // Store the list of developers retrieved from the server
+  const [ticketID, setTicketID] = useState(""); // Store the ID of the ticket being edited
+  const [sortOrder, setSortOrder] = useState("ascending"); // Store the current sorting order
+  const [projectsList, setProjectsList] = useState(["All Projects"]); // Store the list of projects retrieved from the server
+  const [filterBy, setFilterBy] = useState("All Projects"); // Store the current filter
 
+  // Fetch data from the server on component mount
   useEffect(() => {
     async function fetchData() {
       try {
@@ -30,7 +31,8 @@ function CurrentTicket() {
     }
     fetchData();
   }, []);
-  
+
+  // Fetch data from the server whenever the data state changes
   useEffect(() => {
     async function fetchData() {
       try {
@@ -43,6 +45,7 @@ function CurrentTicket() {
     fetchData();
   }, [data]);
 
+  // Fetch the list of developers and projects from the server on component mount
   useEffect(() => {
     async function fetchDevelopers() {
       try {
@@ -57,101 +60,110 @@ function CurrentTicket() {
     fetchDevelopers();
   }, []);
 
-const deletePost = async (id) => {
-  const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
-  if (shouldDelete) {
-    try {
-      await axios.delete(`https://pmtserver.onrender.com/${id}`);
-      alert("Ticket deleted successfully!");
-      setData((prevData) => prevData.filter((ticket) => ticket._id !== id));
-      const response = await axios.get("https://pmtserver.onrender.com");
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-      alert("An error occurred while deleting the ticket.");
+  // Delete a ticket from the server
+  const deletePost = async (id) => {
+    const shouldDelete = window.confirm("Are you sure you want to delete this ticket?");
+    if (shouldDelete) {
+      try {
+        await axios.delete(`https://pmtserver.onrender.com/${id}`);
+        alert("Ticket deleted successfully!");
+        setData((prevData) => prevData.filter((ticket) => ticket._id !== id));
+        const response = await axios.get("https://pmtserver.onrender.com");
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+        alert("An error occurred while deleting the ticket.");
+      }
     }
   }
-}
 
+  // Open the edit modal
   const openModal = (id) => {
     setTicketID(id);
     setShowModal(true);
   };
 
+  // Close the edit modal
   const closeModal = () => setShowModal(false);
 
-  const saveEdit = async (id) => {
-    try {
-      await axios.patch(`https://pmtserver.onrender.com/${id}`, {
-        description: description,
-        developer: developer,
-        priority: priority,
-        status: status,
-      });
-      alert("Ticket updated successfully!");
-      setTicketID("");
-      window.location.reload(); // Reload the page
-      closeModal();
-    } catch (error) {
-      console.log(error);
-      alert("An error occurred while updating the ticket.");
-    }
-  };
+// Save changes made to a ticket with the given ID by making a PATCH request to the server
+// Update the alert message and reset the form fields and ticket ID
+// Reload the page and close the modal after the ticket is successfully updated
+// Show an error message if an error occurs while updating the ticket
+const saveEdit = async (id) => {
+  try {
+    await axios.patch(`https://pmtserver.onrender.com/${id}`, {
+      description: description,
+      developer: developer,
+      priority: priority,
+      status: status,
+    });
+    alert("Ticket updated successfully!");
+    setTicketID("");
+    window.location.reload(); // Reload the page
+    closeModal();
+  } catch (error) {
+    console.log(error);
+    alert("An error occurred while updating the ticket.");
+  }
+};
 
+// Toggle the sort order between ascending and descending
+const toggleSortOrder = () => {
+  if (sortOrder === "ascending") {
+    setSortOrder("descending");
+  } else {
+    setSortOrder("ascending");
+  }
+};
 
-// Filter the tickets based on their status
-// Sort the data array based on the priority key
-
-
-  const toggleSortOrder = () => {
-    if (sortOrder === "ascending") {
-      setSortOrder("descending");
+// Sort the data array based on the priority key and the current sort order
+// Order the tickets with higher priorities first
+// If the priorities are the same, keep their original order
+const sortedData = data.sort((a, b) => {
+  if (a.Priority === b.Priority) {
+    return 0;
+  } else if (sortOrder === "ascending") {
+    if (a.Priority === "Critical") {
+      return -1;
+    } else if (b.Priority === "Critical") {
+      return 1;
+    } else if (a.Priority === "High") {
+      return -1;
+    } else if (b.Priority === "High") {
+      return 1;
+    } else if (a.Priority === "Medium") {
+      return -1;
     } else {
-      setSortOrder("ascending");
+      return 1;
     }
-  };
-
-
-  const sortedData = data.sort((a, b) => {
-    if (a.Priority === b.Priority) {
-      return 0;
-    } else if (sortOrder === "ascending") {
-      if (a.Priority === "Critical") {
-        return -1;
-      } else if (b.Priority === "Critical") {
-        return 1;
-      } else if (a.Priority === "High") {
-        return -1;
-      } else if (b.Priority === "High") {
-        return 1;
-      } else if (a.Priority === "Medium") {
-        return -1;
-      } else {
-        return 1;
-      }
+  } else {
+    if (a.Priority === "Low") {
+      return -1;
+    } else if (b.Priority === "Low") {
+      return 1;
+    } else if (a.Priority === "Medium") {
+      return -1;
+    } else if (b.Priority === "Medium") {
+      return 1;
+    } else if (a.Priority === "High") {
+      return -1;
     } else {
-      if (a.Priority === "Low") {
-        return -1;
-      } else if (b.Priority === "Low") {
-        return 1;
-      } else if (a.Priority === "Medium") {
-        return -1;
-      } else if (b.Priority === "Medium") {
-        return 1;
-      } else if (a.Priority === "High") {
-        return -1;
-      } else {
-        return 1;
-      }
+      return 1;
     }
-  });
+  }
+});
 
+// Filter the data array based on the current filter and sorted order
+// Show all tickets if the filter is set to "All Projects"
+// Otherwise, show only tickets for the selected project
 const filteredData =
   filterBy === "All Projects"
     ? sortedData
     : sortedData.filter((ticket) => ticket.Project === filterBy);
 
-// Filter the tickets based on their status
+// Filter the data array further based on the ticket status
+// Show only tickets that are "To do", "In progress", "In review", or "Finished"
 const todoTickets = filteredData.filter((ticket) => ticket.Status === "To do");
 const inProgressTickets = filteredData.filter(
   (ticket) => ticket.Status === "In progress"
@@ -162,7 +174,6 @@ const inReviewTickets = filteredData.filter(
 const finishedTickets = filteredData.filter(
   (ticket) => ticket.Status === "Finished"
 );
-
 function calculatePosition(container) {
   const rect = container.getBoundingClientRect();
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
